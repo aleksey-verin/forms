@@ -127,8 +127,13 @@
   margin-top: 24px;
 }
 .create-form label {
+  width: -moz-fit-content;
+  width: fit-content;
   font-size: 14px;
-  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 8px;
 }
 .create-form input {
   width: 400px;
@@ -136,6 +141,9 @@
   border: 1px solid rgba(0, 0, 0, 0.16);
   border-radius: 4px;
   margin-bottom: 24px;
+}
+.create-form input.error {
+  border: 1px solid rgba(255, 0, 0, 0.5);
 }
 .create-form select {
   width: 400px;
@@ -145,6 +153,12 @@
   margin-bottom: 24px;
   box-sizing: content-box;
 }
+.create-form select.error {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+.create-form select.empty {
+  color: rgba(0, 0, 0, 0.478);
+}
 .create-form__buttons {
   display: flex;
   justify-content: space-between;
@@ -153,4 +167,19 @@
   margin-top: 24px;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.field-error {
+  position: absolute;
+  color: red;
+  font-size: 10px;
+  bottom: 8px;
+  right: 0px;
+}
+
+.field-tip {
+  position: absolute;
+  font-size: 10px;
+  bottom: 8px;
+  left: 0px;
 }/*# sourceMappingURL=App.css.map */
