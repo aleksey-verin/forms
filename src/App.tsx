@@ -1,8 +1,13 @@
 import './App.css';
 import AppRouter from './components/AppRouter';
+import LayoutContainer from './components/layouts/LayoutContainer';
 
 function App() {
-  return <AppRouter />;
+  return (
+    <LayoutContainer>
+      <AppRouter />
+    </LayoutContainer>
+  );
 }
 
 export default App;
