@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { HashRouter, Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import MainPage from '../pages/MainPage';
 import CreatePage from '../pages/CreatePage';
 import { ROUTES } from '../routes/routes';
