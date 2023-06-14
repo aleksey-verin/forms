@@ -1,18 +1,117 @@
+@font-face {
+  font-family: SB Sans Interface;
+  src: url('/fonts/SB Sans Interface.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 #root {
-  max-width: 1280px;
+  // max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  // padding: 2rem;
+  // text-align: center;
 }
 
 .container {
+  width: 100%;
   max-width: 930px;
+  box-sizing: border-box;
   padding: 0 15px;
   margin: 0 auto;
 }
-.wrapper {
-  padding: 62px 110px 80px;
+
+.main {
+  height: 100%;
+  padding: 24px;
   background: #fff;
   border-radius: 12px;
+  box-sizing: border-box;
   margin-top: 24px;
+  &-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    &__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      background: #d5e4f7;
+      color: #212830;
+    }
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    &__name {
+      font-size: 20px;
+      line-height: 26px;
+      font-weight: 600;
+    }
+    &__links {
+      font-size: 12px;
+      line-height: 16px;
+      display: flex;
+      gap: 16px;
+      & a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+  }
+  &-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    & label {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    & input {
+      width: 400px;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    & button {
+      margin-top: 24px;
+      width: fit-content;
+    }
+  }
+}
+
+.buttonMain {
+  font-size: 14px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 4px;
+  background-color: #5558fa;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  position: relative;
+  &.transparent {
+    background-color: inherit;
+    border: 1.5px solid #5558fa;
+    color: #5558fa;
+  }
+  & svg {
+    margin: 0 auto;
+    position: absolute;
+  }
 }

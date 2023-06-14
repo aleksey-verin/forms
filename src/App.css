@@ -1,19 +1,114 @@
+@font-face {
+  font-family: SB Sans Interface;
+  src: url("/fonts/SB Sans Interface.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
 }
 
 .container {
+  width: 100%;
   max-width: 930px;
+  box-sizing: border-box;
   padding: 0 15px;
   margin: 0 auto;
 }
 
-.wrapper {
-  padding: 62px 110px 80px;
+.main {
+  height: 100%;
+  padding: 24px;
   background: #fff;
   border-radius: 12px;
+  box-sizing: border-box;
   margin-top: 24px;
+}
+.main-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+.main-title__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background: #d5e4f7;
+  color: #212830;
+}
+.main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.main-info__name {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
+.main-info__links {
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  gap: 16px;
+}
+.main-info__links a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.main-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+.main-form label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.main-form input {
+  width: 400px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.main-form button {
+  margin-top: 24px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.buttonMain {
+  font-size: 14px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 4px;
+  background-color: #5558fa;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  position: relative;
+}
+.buttonMain.transparent {
+  background-color: inherit;
+  border: 1.5px solid #5558fa;
+  color: #5558fa;
+}
+.buttonMain svg {
+  margin: 0 auto;
+  position: absolute;
 }/*# sourceMappingURL=App.css.map */
