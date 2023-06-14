@@ -111,4 +111,46 @@
 .buttonMain svg {
   margin: 0 auto;
   position: absolute;
+}
+
+.create {
+  height: 100%;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin-top: 24px;
+}
+.create-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+.create-form label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.create-form input {
+  width: 400px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.create-form select {
+  width: 400px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  margin-bottom: 24px;
+  box-sizing: content-box;
+}
+.create-form__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.create-form button {
+  margin-top: 24px;
+  width: -moz-fit-content;
+  width: fit-content;
 }/*# sourceMappingURL=App.css.map */

@@ -115,3 +115,46 @@
     position: absolute;
   }
 }
+
+.create {
+  height: 100%;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin-top: 24px;
+  &-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    & label {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    & input {
+      width: 400px;
+      padding: 12px;
+      // background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    & select {
+      width: 400px;
+      padding: 12px;
+      // background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      border-radius: 4px;
+      margin-bottom: 24px;
+      box-sizing: content-box;
+    }
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    & button {
+      margin-top: 24px;
+      width: fit-content;
+    }
+  }
+}

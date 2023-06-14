@@ -5,11 +5,15 @@ interface ButtonProps {
   text?: string;
   transparent?: boolean;
   image?: ReactNode;
+  handleClick?: () => void;
 }
 
-const Button: FC<ButtonProps> = ({ type, text, transparent = false, image }) => {
+const Button: FC<ButtonProps> = ({ type, text, transparent = false, image, handleClick }) => {
   return (
-    <button className={`buttonMain ${transparent ? 'transparent' : ''}`} type={type}>
+    <button
+      onClick={handleClick}
+      className={`buttonMain ${transparent ? 'transparent' : ''}`}
+      type={type}>
       {image}
       {text}
     </button>
