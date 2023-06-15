@@ -1,54 +1,44 @@
-import { Formik, Field, Form, FormikHelpers, FieldProps } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { FC } from 'react';
 import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
-import { ROUTES } from '../../routes/routes';
-import { setCurrentStep, setStepThreeData } from '../../store/reducers/formSlice';
-import {
-  validationMacLength,
-  onlyLettersAndDigitsRegExp,
-  onlyLettersRegExp
-} from '../../utils/constants/validation';
+import { selectorForm, setCurrentStep, setStepThreeData } from '../../store/reducers/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { countCharactersWithoutSpaces } from '../../utils/helpers';
+import { useSelector } from 'react-redux';
 
 const stepOneSchema = yup.object().shape({
-  // nickname: yup
-  //   .string()
-  //   .trim('')
-  //   .max(validationMacLength.nickname, 'Too Long!')
-  //   .matches(onlyLettersAndDigitsRegExp)
-  //   .required('Required'),
-  // name: yup
-  //   .string()
-  //   .trim('')
-  //   .max(validationMacLength.name, 'Too Long!')
-  //   .matches(onlyLettersRegExp)
-  //   .required('Required'),
-  // surname: yup
-  //   .string()
-  //   .trim('')
-  //   .max(validationMacLength.surname, 'Too Long!')
-  //   .matches(onlyLettersRegExp)
-  //   .required('Required'),
-  about: yup.string().required('Required!')
+  about: yup
+    .string()
+    .test(
+      'maxCharacters',
+      'Длина сообщения не должна превышать 200 символов без пробелов',
+      (value) => {
+        if (value) {
+          const stringWithoutSpaces = value.replace(/\s/g, '');
+          return stringWithoutSpaces.length <= 20;
+        }
+        return true; // Разрешаем пустое значение (необязательное поле)
+      }
+    )
+    .required('Required!')
 });
 
 const FormStepTree: FC = () => {
   const dispatch = useAppDispatch();
-  // const {
-  //   formData: {
-  //     stepOne: { nickname, name, surname, gender }
-  //   }
-  // } = useSelector(selectorForm);
+  const {
+    formData: {
+      stepThree: { about }
+    }
+  } = useSelector(selectorForm);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <Formik
       initialValues={{
-        about: ''
+        about: about
       }}
       validationSchema={stepOneSchema}
       validateOnBlur
@@ -60,9 +50,9 @@ const FormStepTree: FC = () => {
       {({
         values,
         errors,
-        touched,
-        handleChange,
-        handleBlur
+        touched
+        // handleChange,
+        // handleBlur
         // isValid,
         // dirty,
         // handleSubmit
@@ -98,6 +88,7 @@ const FormStepTree: FC = () => {
           <div className="create-form__buttons">
             <Button
               handleClick={() => {
+                dispatch(setStepThreeData(values));
                 dispatch(setCurrentStep(2));
               }}
               type="button"

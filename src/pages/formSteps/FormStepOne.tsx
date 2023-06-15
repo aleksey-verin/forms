@@ -141,6 +141,7 @@ const FormStepOne: FC = () => {
           <div className="create-form__buttons">
             <Button
               handleClick={() => {
+                dispatch(setStepOneData(values));
                 dispatch(setCurrentStep('initial')); // проверить надо ли
                 navigate(ROUTES.mainPage);
               }}

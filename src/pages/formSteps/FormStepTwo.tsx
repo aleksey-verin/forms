@@ -69,18 +69,6 @@ const FormStepTwo: FC = () => {
                   {values.advantage.map((_, index) => (
                     <div className="advantage-field" key={index}>
                       <Field name={`advantage.${index}`} placeholder={'advantage'} />
-                      {/* <button
-                          type="button"
-                          onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                        >
-                          -
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
-                        >
-                          +
-                        </button> */}
                       <button className="button-remove" onClick={() => arrayHelpers.remove(index)}>
                         <ImgBin />
                       </button>
@@ -152,6 +140,7 @@ const FormStepTwo: FC = () => {
           <div className="create-form__buttons">
             <Button
               handleClick={() => {
+                dispatch(setStepTwoData(values));
                 dispatch(setCurrentStep(1)); // проверить надо ли
                 // navigate(ROUTES.mainPage);
               }}
