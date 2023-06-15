@@ -1,12 +1,16 @@
+import { Provider } from 'react-redux';
 import './App.css';
 import AppRouter from './components/AppRouter';
 import LayoutContainer from './components/layouts/LayoutContainer';
+import { store } from './store/store';
 
 function App() {
   return (
-    <LayoutContainer>
-      <AppRouter />
-    </LayoutContainer>
+    <Provider store={store}>
+      <LayoutContainer>
+        <AppRouter />
+      </LayoutContainer>
+    </Provider>
   );
 }
 
