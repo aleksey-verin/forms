@@ -1,4 +1,4 @@
-import { Formik, Field, Form, FieldArray, getIn, FieldProps } from 'formik';
+import { Formik, Field, Form, FieldArray, getIn } from 'formik';
 import { FC } from 'react';
 import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
