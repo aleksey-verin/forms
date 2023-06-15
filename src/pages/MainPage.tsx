@@ -8,15 +8,23 @@ import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { selectorForm, setCurrentStep, setStepZeroData } from '../store/reducers/formSlice';
 import { useSelector } from 'react-redux';
+import { emailRegExp, phoneRegex } from '../utils/constants/validation';
+import InputMask from 'react-input-mask';
 
 const stepZeroSchema = yup.object().shape({
   phone: yup
     .string()
+    // .trim('')
+    // // .max(40, 'Too Long!')
+    .matches(phoneRegex, 'Enter the phone in the format "+7 (XXX) XXX-XX-XX"')
+    .required('Enter the phone in the format "+7 (XXX) XXX-XX-XX"'),
+  // email: yup.string().email('Invalid email').required('Required')
+  email: yup
+    .string()
     .trim('')
-    .max(40, 'Too Long!')
-    // .matches(onlyLettersRegExp)
-    .required('Required'),
-  email: yup.string().email('Invalid email').required('Required')
+    // .max(validationMacLength.nickname, 'Too Long!')
+    .matches(emailRegExp, 'Enter the email in the format "example@domain.com"')
+    .required('Enter the email in the format "example@domain.com"')
 });
 
 interface MainPageProps {}
@@ -26,15 +34,15 @@ const MainPage: FC<MainPageProps> = () => {
   const {
     formData: {
       stepZero: { email, phone }
-    },
-    formStep
+    }
+    // formStep
   } = useSelector(selectorForm);
 
   const navigate = useNavigate();
 
   return (
     <main className="main">
-      <div>{`Current step: ${formStep}`}</div>
+      {/* <div>{`Current step: ${formStep}`}</div> */}
       <div className="main-title">
         <div className="main-title__avatar">
           <div>А</div>
@@ -61,7 +69,8 @@ const MainPage: FC<MainPageProps> = () => {
       <Formik
         initialValues={{
           phone: phone ?? '',
-          email: email ?? ''
+          email: email ?? '',
+          phoneNum: ''
         }}
         validationSchema={stepZeroSchema}
         validateOnBlur
@@ -70,32 +79,22 @@ const MainPage: FC<MainPageProps> = () => {
           dispatch(setCurrentStep(1)); // подумать нужно ли
           navigate(ROUTES.createPage);
         }}>
-        {({
-          // values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur
-          // isValid,
-          // dirty,
-          // handleSubmit
-        }) => (
+        {({ errors, touched, handleChange, handleBlur }) => (
           <Form className="create-form">
             <label>
               Номер телефона
-              <Field
+              <InputMask
                 className={errors.phone && touched.phone ? 'error' : ''}
                 type={'text'}
-                name={'phone'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                // value={phone ? phone : ''}
+                mask="+7 (999) 999-99-99"
+                name="phone"
                 placeholder={'+7 999 999-99-99'}
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
               {errors.phone && touched.phone ? (
                 <div className="field-error">{errors.phone}</div>
               ) : null}
-              <div className="field-tip">Tip is here</div>
             </label>
             <label>
               Email
@@ -113,20 +112,12 @@ const MainPage: FC<MainPageProps> = () => {
                 <div className="field-error">{errors.email}</div>
               ) : null}
             </label>
-
             <div className="create-form__buttons">
               <Button type="submit" text="Начать" />
             </div>
           </Form>
         )}
       </Formik>
-      {/* <form onSubmit={handleSubmit} className="main-form">
-        <label htmlFor="phone">Номер телефона</label>
-        <input type="text" id="phone" placeholder="+7 999 999-99-99" />
-        <label htmlFor="email">Email</label>
-        <input type="text" id="email" placeholder="verevaa@yandex.ru" />
-        <Button type="submit" text="Начать" />
-      </form> */}
     </main>
   );
 };
