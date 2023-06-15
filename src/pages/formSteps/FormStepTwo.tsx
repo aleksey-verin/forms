@@ -1,4 +1,4 @@
-import { Formik, Field, Form, FieldArray } from 'formik';
+import { Formik, Field, Form, FieldArray, getIn, FieldProps } from 'formik';
 import { FC } from 'react';
 import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
@@ -7,17 +7,17 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import ImgPlus from '../../components/images/ImgPlus';
 import ImgBin from '../../components/images/ImgBin';
 import { useSelector } from 'react-redux';
+import { validationMacLength } from '../../utils/constants/validation';
 
 const stepTwoSchema = yup.object().shape({
-  advantage: yup.array().of(
-    yup.string().required('Required!')
-    // yup.object().shape({
-    //   name: yup.string().min(4, 'too short').required('Required'), // these constraints take precedence
-    //   salary: yup.string().min(3, 'cmon').required('Required') // these constraints take precedence
-    // })
-  ),
-  // .required('Must have friends') // these constraints are shown if and only if inner constraints are satisfied
-  // .min(3, 'Minimum of 3 friends'),
+  advantage: yup
+    .array()
+    .of(
+      yup
+        .string()
+        .max(validationMacLength.advantage, 'Too Long!')
+        .required('Please write something!')
+    ),
   checkbox: yup.array().min(1).of(yup.string().required()).required('Required'),
   radio: yup.string().required('Required!')
 });
@@ -29,8 +29,6 @@ const FormStepTwo: FC = () => {
       stepTwo: { advantage, checkbox, radio }
     }
   } = useSelector(selectorForm);
-
-  // const navigate = useNavigate();
 
   return (
     <Formik
@@ -46,37 +44,43 @@ const FormStepTwo: FC = () => {
         dispatch(setCurrentStep(3));
         console.log(values);
       }}>
-      {({
-        values,
-        errors,
-        touched
-        // handleChange,
-        // handleBlur
-        // isValid,
-        // dirty,
-        // handleSubmit
-      }) => (
+      {({ values, errors, touched }) => (
         <Form className="create-form">
           <label>
             Advantage
             <FieldArray
               name="advantage"
-              // onChange={handleChange}
-              // onBlur={handleBlur}
-              // placeholder={'advantage'}
               render={(arrayHelpers) => (
                 <div className="advantage">
-                  {values.advantage.map((_, index) => (
-                    <div className="advantage-field" key={index}>
-                      <Field name={`advantage.${index}`} placeholder={'advantage'} />
-                      <button className="button-remove" onClick={() => arrayHelpers.remove(index)}>
-                        <ImgBin />
-                      </button>
-                    </div>
-                  ))}
-                  {errors.advantage && touched.advantage ? (
-                    <div className="field-error">{errors.advantage}</div>
-                  ) : null}
+                  <div className="advantage-items">
+                    {values.advantage.map((_, index) => (
+                      <div className="advantage-items__field" key={index}>
+                        <Field
+                          className={
+                            getIn(arrayHelpers.form.errors, `advantage.${index}`) &&
+                            getIn(arrayHelpers.form.touched, `advantage.${index}`)
+                              ? 'error'
+                              : ''
+                          }
+                          name={`advantage.${index}`}
+                          placeholder={'advantage'}
+                        />
+                        <button
+                          className="button-remove"
+                          onClick={() => arrayHelpers.remove(index)}>
+                          <ImgBin />
+                        </button>
+                        {/* <ErrorMessage name={`advantage.${index}`} /> */}
+                        {getIn(arrayHelpers.form.errors, `advantage.${index}`) &&
+                        getIn(arrayHelpers.form.touched, `advantage.${index}`) ? (
+                          <div className="advantage-error">
+                            {getIn(arrayHelpers.form.errors, `advantage.${index}`)}
+                          </div>
+                        ) : null}
+                        <div className="field-tip">{`Max - ${validationMacLength.advantage} chars`}</div>
+                      </div>
+                    ))}
+                  </div>
                   <Button
                     handleClick={() => {
                       arrayHelpers.push('');
@@ -88,18 +92,6 @@ const FormStepTwo: FC = () => {
                 </div>
               )}
             />
-            {/* {advantageArray.map((item, index) => (
-              <Field
-                key={index}
-                className={errors.advantage && touched.advantage ? 'error' : ''}
-                type={'text'}
-                name={'advantage'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder={'advantage'}
-              />
-            ))} */}
-            {/* <div className="field-tip">Tip is here</div> */}
           </label>
           <div className="checkbox" role="group" aria-labelledby="checkbox-group">
             <div>Checkbox group</div>
@@ -141,8 +133,7 @@ const FormStepTwo: FC = () => {
             <Button
               handleClick={() => {
                 dispatch(setStepTwoData(values));
-                dispatch(setCurrentStep(1)); // проверить надо ли
-                // navigate(ROUTES.mainPage);
+                dispatch(setCurrentStep(1));
               }}
               type="button"
               text="Назад"

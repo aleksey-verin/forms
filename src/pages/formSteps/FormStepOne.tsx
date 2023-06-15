@@ -100,6 +100,7 @@ const FormStepOne: FC = () => {
               placeholder={'Name'}
             />
             {errors.name && touched.name ? <div className="field-error">{errors.name}</div> : null}
+            <div className="field-tip">Tip is here</div>
           </label>
           <label>
             Surname
@@ -115,6 +116,7 @@ const FormStepOne: FC = () => {
             {errors.surname && touched.surname ? (
               <div className="field-error">{errors.surname}</div>
             ) : null}
+            <div className="field-tip">Tip is here</div>
           </label>
           <label>
             Gender
@@ -137,6 +139,7 @@ const FormStepOne: FC = () => {
             {errors.gender && touched.gender ? (
               <div className="field-error">{errors.gender}</div>
             ) : null}
+            <div className="field-tip">Tip is here</div>
           </label>
           <div className="create-form__buttons">
             <Button

@@ -51,15 +51,15 @@ const MainPage: FC<MainPageProps> = () => {
         <div className="main-info">
           <div className="main-info__name">Алексей Верин</div>
           <div className="main-info__links">
-            <a href="http://">
+            <a target="_blank" href="http://t.me/verevaa">
               <ImgFolder />
               Telegram
             </a>
-            <a href="http://">
+            <a target="_blank" href="https://github.com/aleksey-verin">
               <ImgFolder />
               GitHub
             </a>
-            <a href="http://">
+            <a target="_blank" href="./Aleksey Verin - Frontend - CV.pdf">
               <ImgFolder />
               Resume
             </a>
