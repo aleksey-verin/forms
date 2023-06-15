@@ -5,25 +5,27 @@ import FormStepOne from './formSteps/FormStepOne';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes';
 import FormStepTwo from './formSteps/FormStepTwo';
+import FormStepTree from './formSteps/FormStepTree';
 
 interface CreatePageProps {}
 
 const CreatePage: FC<CreatePageProps> = () => {
-  const { formStep } = useSelector(selectorForm);
+  const { formCurrentStep } = useSelector(selectorForm);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log('useEffect');
-    if (formStep === 'initial') {
+    if (formCurrentStep === 'initial') {
       navigate(ROUTES.mainPage);
     }
-  }, [formStep, navigate]);
+  }, [formCurrentStep, navigate]);
 
   return (
     <main className="create">
-      <div>{`Current step: ${formStep}`}</div>
-      {formStep === 1 && <FormStepOne />}
-      {formStep === 2 && <FormStepTwo />}
+      <div>{`Current step: ${formCurrentStep}`}</div>
+      {formCurrentStep === 1 && <FormStepOne />}
+      {formCurrentStep === 2 && <FormStepTwo />}
+      {formCurrentStep === 3 && <FormStepTree />}
     </main>
   );
 };

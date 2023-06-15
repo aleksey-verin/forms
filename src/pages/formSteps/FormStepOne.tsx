@@ -48,10 +48,10 @@ const FormStepOne: FC = () => {
   return (
     <Formik
       initialValues={{
-        nickname: nickname ?? '',
-        name: name ?? '',
-        surname: surname ?? '',
-        gender: gender ?? ''
+        nickname: nickname,
+        name: name,
+        surname: surname,
+        gender: gender
       }}
       validationSchema={stepOneSchema}
       validateOnBlur

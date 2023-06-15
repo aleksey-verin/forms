@@ -135,13 +135,15 @@
       position: relative;
       gap: 8px;
     }
-    & input {
+    & input,
+    textarea {
       width: 400px;
       padding: 12px;
       // background: rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(0, 0, 0, 0.16);
       border-radius: 4px;
       margin-bottom: 24px;
+      font-family: inherit;
       &.error {
         border: 1px solid rgba(255, 0, 0, 0.5);
       }
@@ -162,6 +164,10 @@
       &.empty {
         color: rgba(0, 0, 0, 0.478);
       }
+    }
+    & textarea {
+      width: 100%;
+      height: 84px;
     }
     &__buttons {
       display: flex;
@@ -206,4 +212,34 @@
   font-size: 10px;
   bottom: 8px;
   left: 0px;
+}
+
+.button-remove {
+  background-color: inherit;
+  border: none;
+  &:hover svg path {
+    fill: red;
+  }
+  // align-self: center;
+}
+.advantage {
+  & input,
+  button {
+    margin: 0;
+  }
+  &-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+}
+
+.about-field {
+  width: 100% !important;
+  & textarea {
+    // width: auto;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
 }

@@ -10,7 +10,18 @@ interface StepOneData {
   nickname: string | null;
   name: string | null;
   surname: string | null;
-  gender: 'male' | 'female' | '';
+  gender: Gender;
+}
+
+type Gender = 'male' | 'female' | '';
+
+interface StepTwoData {
+  advantage: string[];
+  checkbox: string[];
+  radio: string;
+}
+interface StepThreeData {
+  about: string;
 }
 
 type FormStep = 'initial' | 1 | 2 | 3;
@@ -19,12 +30,10 @@ interface initialStateTypes {
   formData: {
     stepZero: StepZeroData;
     stepOne: StepOneData;
-    // advantages: string[];
-    // radio: number | null;
-    // checkbox: number[];
-    // about: string | null;
+    stepTwo: StepTwoData;
+    stepThree: StepThreeData;
   };
-  formStep: FormStep;
+  formCurrentStep: FormStep;
 }
 
 const initialState = {
@@ -34,17 +43,21 @@ const initialState = {
       email: null
     },
     stepOne: {
-      nickname: null,
-      name: null,
-      surname: null,
+      nickname: '',
+      name: '',
+      surname: '',
       gender: ''
+    },
+    stepTwo: {
+      advantage: [''],
+      checkbox: [],
+      radio: ''
+    },
+    stepThree: {
+      about: ''
     }
   },
-  formStep: 2
-  // about: null,
-  // radio: 1,
-  // advantages: [],
-  // checkbox: [1]
+  formCurrentStep: 3
 };
 
 export const formSlice = createSlice({
@@ -61,12 +74,24 @@ export const formSlice = createSlice({
       state.formData.stepOne.surname = payload.surname;
       state.formData.stepOne.gender = payload.gender;
     },
+    setStepTwoData: (state, { payload }: PayloadAction<StepTwoData>) => {
+      state.formData.stepTwo.advantage = payload.advantage;
+      state.formData.stepTwo.checkbox = payload.checkbox;
+      state.formData.stepTwo.radio = payload.radio;
+    },
+    setStepThreeData: (state, { payload }: PayloadAction<StepThreeData>) => {
+      state.formData.stepThree.about = payload.about;
+    },
     setCurrentStep: (state, { payload }: PayloadAction<FormStep>) => {
-      state.formStep = payload;
+      state.formCurrentStep = payload;
+    },
+    resetFormData: (state) => {
+      state.formData.stepOne.gender = initialState.formData.stepOne.gender as Gender;
     }
   }
 });
 
 export const selectorForm = (state: IRootState) => state.formSlice;
-export const { setStepOneData, setStepZeroData, setCurrentStep } = formSlice.actions;
+export const { setStepOneData, setStepZeroData, setStepTwoData, setStepThreeData, setCurrentStep } =
+  formSlice.actions;
 export default formSlice.reducer;
