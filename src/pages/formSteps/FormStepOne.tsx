@@ -1,39 +1,12 @@
 import { Formik, Field, Form } from 'formik';
 import { FC } from 'react';
-import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
 import { ROUTES } from '../../routes/routes';
-import { setStepOneData, setCurrentStep, selectorForm } from '../../store/reducers/formSlice';
-import {
-  validationMacLength,
-  onlyLettersAndDigitsRegExp,
-  onlyLettersRegExp
-} from '../../utils/constants/validation';
+import { setStepOneData, setCurrentStep, selectorForm } from '../../store/reducers/form/formSlice';
+import { stepOneSchema } from '../../utils/validation/validation';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-const stepOneSchema = yup.object().shape({
-  nickname: yup
-    .string()
-    .trim('')
-    .max(validationMacLength.nickname, 'Too Long!')
-    .matches(onlyLettersAndDigitsRegExp)
-    .required('Required'),
-  name: yup
-    .string()
-    .trim('')
-    .max(validationMacLength.name, 'Too Long!')
-    .matches(onlyLettersRegExp)
-    .required('Required'),
-  surname: yup
-    .string()
-    .trim('')
-    .max(validationMacLength.surname, 'Too Long!')
-    .matches(onlyLettersRegExp)
-    .required('Required'),
-  gender: yup.string().required('Required!')
-});
 
 const FormStepOne: FC = () => {
   const dispatch = useAppDispatch();
@@ -135,10 +108,10 @@ const FormStepOne: FC = () => {
                 navigate(ROUTES.mainPage);
               }}
               type="button"
-              text="Назад"
-              transparent={true}
-            />
-            <Button type="submit" text="Далее" />
+              transparent={true}>
+              Назад
+            </Button>
+            <Button type="submit">Далее</Button>
           </div>
         </Form>
       )}

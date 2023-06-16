@@ -1,26 +1,12 @@
 import { Formik, Field, Form, FieldArray, getIn } from 'formik';
 import { FC } from 'react';
-import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
-import { selectorForm, setCurrentStep, setStepTwoData } from '../../store/reducers/formSlice';
+import { selectorForm, setCurrentStep, setStepTwoData } from '../../store/reducers/form/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import ImgPlus from '../../components/images/ImgPlus';
 import ImgBin from '../../components/images/ImgBin';
 import { useSelector } from 'react-redux';
-import { validationMacLength } from '../../utils/constants/validation';
-
-const stepTwoSchema = yup.object().shape({
-  advantage: yup
-    .array()
-    .of(
-      yup
-        .string()
-        .max(validationMacLength.advantage, 'Too Long!')
-        .required('Please write something!')
-    ),
-  checkbox: yup.array().min(1).of(yup.string().required()).required('Required'),
-  radio: yup.string().required('Required!')
-});
+import { lengthOfFields, stepTwoSchema } from '../../utils/validation/validation';
 
 const FormStepTwo: FC = () => {
   const dispatch = useAppDispatch();
@@ -77,7 +63,7 @@ const FormStepTwo: FC = () => {
                             {getIn(arrayHelpers.form.errors, `advantage.${index}`)}
                           </div>
                         ) : null}
-                        <div className="field-tip">{`Max - ${validationMacLength.advantage} chars`}</div>
+                        <div className="field-tip">{`Max - ${lengthOfFields.advantage} chars`}</div>
                       </div>
                     ))}
                   </div>
@@ -86,9 +72,9 @@ const FormStepTwo: FC = () => {
                       arrayHelpers.push('');
                     }}
                     type="button"
-                    image={<ImgPlus />}
-                    transparent={true}
-                  />
+                    transparent={true}>
+                    <ImgPlus />
+                  </Button>
                 </div>
               )}
             />
@@ -136,10 +122,10 @@ const FormStepTwo: FC = () => {
                 dispatch(setCurrentStep(1));
               }}
               type="button"
-              text="Назад"
-              transparent={true}
-            />
-            <Button type="submit" text="Далее" />
+              transparent={true}>
+              Назад
+            </Button>
+            <Button type="submit">Далее</Button>
           </div>
         </Form>
       )}

@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectorForm } from '../store/reducers/formSlice';
+import { selectorForm } from '../store/reducers/form/formSlice';
 import FormStepOne from './formSteps/FormStepOne';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes';

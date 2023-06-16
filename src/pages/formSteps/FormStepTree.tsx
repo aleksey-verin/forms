@@ -1,31 +1,17 @@
 import { Formik, Field, Form } from 'formik';
 import { FC, useState } from 'react';
-import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
-import { selectorForm, setCurrentStep, setStepThreeData } from '../../store/reducers/formSlice';
+import {
+  selectorForm,
+  setCurrentStep,
+  setStepThreeData
+} from '../../store/reducers/form/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
-// import { useNavigate } from 'react-router-dom';
 import { countCharactersWithoutSpaces } from '../../utils/helpers';
 import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
 import ModalWindow from '../../components/modal-window/ModalWindow';
-
-const stepOneSchema = yup.object().shape({
-  about: yup
-    .string()
-    .test(
-      'maxCharacters',
-      'Длина сообщения не должна превышать 200 символов без пробелов',
-      (value) => {
-        if (value) {
-          const stringWithoutSpaces = value.replace(/\s/g, '');
-          return stringWithoutSpaces.length <= 20;
-        }
-        return true; // Разрешаем пустое значение (необязательное поле)
-      }
-    )
-    .required('Required!')
-});
+import { stepThreeSchema } from '../../utils/validation/validation';
 
 const FormStepTree: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,13 +24,14 @@ const FormStepTree: FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   // const navigate = useNavigate();
+  const isSuccess = true;
 
   return (
     <Formik
       initialValues={{
         about: about
       }}
-      validationSchema={stepOneSchema}
+      validationSchema={stepThreeSchema}
       validateOnBlur
       onSubmit={(values) => {
         dispatch(setStepThreeData(values));
@@ -65,7 +52,7 @@ const FormStepTree: FC = () => {
             {errors.about && touched.about ? (
               <div className="field-error">{errors.about}</div>
             ) : null}
-            <div className="field-tip">{`Characters without spaces: ${countCharactersWithoutSpaces(
+            <div className="field-tip">{`Characters without spaces (max - 200): ${countCharactersWithoutSpaces(
               values.about
             )}`}</div>
           </label>
@@ -77,16 +64,19 @@ const FormStepTree: FC = () => {
                 dispatch(setCurrentStep(2));
               }}
               type="button"
-              text="Назад"
-              transparent={true}
-            />
-            <Button type="submit" text="Отправить" />
+              transparent={true}>
+              Назад
+            </Button>
+            <Button type="submit">Отправить</Button>
           </div>
           <button style={{ backgroundColor: 'white' }} onClick={() => setShowModal(true)}>
             Show modal using a portal
           </button>
           {showModal &&
-            createPortal(<ModalWindow onClose={() => setShowModal(false)} />, document.body)}
+            createPortal(
+              <ModalWindow onClose={() => setShowModal(false)} isSuccess={isSuccess} />,
+              document.body
+            )}
         </Form>
       )}
     </Formik>

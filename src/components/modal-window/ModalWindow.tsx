@@ -7,11 +7,10 @@ import ImgRejectedRequest from '../images/ImgRejectedRequest';
 
 interface ModalWindowProps {
   onClose: () => void;
+  isSuccess: boolean;
 }
 
-const isSuccess = false;
-
-const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
+const ModalWindow: FC<ModalWindowProps> = ({ onClose, isSuccess }) => {
   const navigate = useNavigate();
 
   const handleClickSuccess = () => {
@@ -28,7 +27,9 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
             <div className="modal-content__image">
               <ImgSuccessRequest />
             </div>
-            <Button type="button" handleClick={handleClickSuccess} text="На главную" />
+            <Button type="button" handleClick={handleClickSuccess}>
+              На главную
+            </Button>
           </>
         ) : (
           <>
@@ -36,7 +37,9 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
             <div className="modal-content__image">
               <ImgRejectedRequest />
             </div>
-            <Button type="button" handleClick={onClose} text="Закрыть" />
+            <Button type="button" handleClick={onClose}>
+              Закрыть
+            </Button>
           </>
         )}
       </div>

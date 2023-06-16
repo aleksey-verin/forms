@@ -1,30 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IRootState } from '../store';
-
-interface StepZeroData {
-  phone: string | null;
-  email: string | null;
-}
-
-interface StepOneData {
-  nickname: string | null;
-  name: string | null;
-  surname: string | null;
-  gender: Gender;
-}
-
-type Gender = 'male' | 'female' | '';
-
-interface StepTwoData {
-  advantage: string[];
-  checkbox: string[];
-  radio: string;
-}
-interface StepThreeData {
-  about: string;
-}
-
-export type FormStep = 'initial' | 1 | 2 | 3;
+import { IRootState } from '../../store';
+import { FormStep, Gender, StepOneData, StepThreeData, StepTwoData, StepZeroData } from './types';
 
 interface initialStateTypes {
   formData: {

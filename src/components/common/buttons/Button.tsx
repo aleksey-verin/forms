@@ -2,20 +2,20 @@ import { FC, ReactNode } from 'react';
 
 interface ButtonProps {
   type: 'submit' | 'button';
-  text?: string;
+  // text?: string;
   transparent?: boolean;
-  image?: ReactNode;
+  // image?: ReactNode;
   handleClick?: () => void;
+  children: ReactNode;
 }
 
-const Button: FC<ButtonProps> = ({ type, text, transparent = false, image, handleClick }) => {
+const Button: FC<ButtonProps> = ({ type, transparent = false, handleClick, children }) => {
   return (
     <button
       onClick={handleClick}
       className={`buttonMain ${transparent ? 'transparent' : ''}`}
       type={type}>
-      {image}
-      {text}
+      {children}
     </button>
   );
 };

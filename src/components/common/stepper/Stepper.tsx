@@ -1,5 +1,5 @@
 import { CSSProperties, FC } from 'react';
-import { FormStep } from '../../../store/reducers/formSlice';
+import { FormStep } from '../../../store/reducers/form/types';
 
 interface StepperProps {
   currentStep: FormStep;
@@ -36,7 +36,7 @@ const Stepper: FC<StepperProps> = ({ currentStep, stepperData }) => {
       <div className="stepper-grey-line"></div>
       <div className="stepper-items">
         {stepperData.map((_, index) => (
-          <div className={`stepper-items-item ${classForStep(index, currentStep)}`}>
+          <div key={index} className={`stepper-items-item ${classForStep(index, currentStep)}`}>
             <div className="item-block"></div>
           </div>
         ))}
@@ -44,6 +44,7 @@ const Stepper: FC<StepperProps> = ({ currentStep, stepperData }) => {
       <div className="stepper-title">
         {stepperData.map((item, index, array) => (
           <div
+            key={index}
             style={styleForEdgedText(index, array)}
             className={`stepper-title__item ${classForTitle(index, currentStep)}`}>
             {item}
