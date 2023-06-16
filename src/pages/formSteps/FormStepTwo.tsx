@@ -1,7 +1,11 @@
 import { Formik, Field, Form, FieldArray, getIn } from 'formik';
 import { FC } from 'react';
 import Button from '../../components/common/buttons/Button';
-import { selectorForm, setCurrentStep, setStepTwoData } from '../../store/reducers/form/formSlice';
+import {
+  selectorForm,
+  setCurrentStep,
+  setStepTwoData
+} from '../../store/reducers/formData/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import ImgPlus from '../../components/images/ImgPlus';
 import ImgBin from '../../components/images/ImgBin';

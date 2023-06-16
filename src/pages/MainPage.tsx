@@ -5,7 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes';
 import { useAppDispatch } from '../utils/hooks/useAppDispatch';
 import { Field, Form, Formik } from 'formik';
-import { selectorForm, setCurrentStep, setStepZeroData } from '../store/reducers/form/formSlice';
+import {
+  selectorForm,
+  setCurrentStep,
+  setStepZeroData
+} from '../store/reducers/formData/formSlice';
 import { useSelector } from 'react-redux';
 import { stepZeroSchema } from '../utils/validation/validation';
 import InputMask from 'react-input-mask';
@@ -16,7 +20,6 @@ const MainPage: FC = () => {
     formData: {
       stepZero: { email, phone }
     }
-    // formStep
   } = useSelector(selectorForm);
 
   const navigate = useNavigate();

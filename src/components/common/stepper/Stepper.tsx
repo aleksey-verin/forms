@@ -1,5 +1,5 @@
 import { CSSProperties, FC } from 'react';
-import { FormStep } from '../../../store/reducers/form/types';
+import { FormStep } from '../../../store/reducers/formData/types';
 
 interface StepperProps {
   currentStep: FormStep;

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IRootState } from '../../store';
-import { FormStep, Gender, StepOneData, StepThreeData, StepTwoData, StepZeroData } from './types';
+import { FormStep, StepOneData, StepThreeData, StepTwoData, StepZeroData } from './types';
 
 interface initialStateTypes {
   formData: {
@@ -60,10 +60,11 @@ export const formSlice = createSlice({
     },
     setCurrentStep: (state, { payload }: PayloadAction<FormStep>) => {
       state.formCurrentStep = payload;
-    },
-    resetFormData: (state) => {
-      state.formData.stepOne.gender = initialState.formData.stepOne.gender as Gender;
     }
+
+    // resetFormData: (state) => {
+    //   state.formData.stepOne.gender = initialState.formData.stepOne.gender as Gender;
+    // }
   }
 });
 

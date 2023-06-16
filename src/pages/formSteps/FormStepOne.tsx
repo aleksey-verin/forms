@@ -2,7 +2,11 @@ import { Formik, Field, Form } from 'formik';
 import { FC } from 'react';
 import Button from '../../components/common/buttons/Button';
 import { ROUTES } from '../../routes/routes';
-import { setStepOneData, setCurrentStep, selectorForm } from '../../store/reducers/form/formSlice';
+import {
+  selectorForm,
+  setCurrentStep,
+  setStepOneData
+} from '../../store/reducers/formData/formSlice';
 import { stepOneSchema } from '../../utils/validation/validation';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';

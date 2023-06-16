@@ -5,7 +5,7 @@ import {
   selectorForm,
   setCurrentStep,
   setStepThreeData
-} from '../../store/reducers/form/formSlice';
+} from '../../store/reducers/formData/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { countCharactersWithoutSpaces } from '../../utils/helpers';
 import { useSelector } from 'react-redux';
