@@ -4,6 +4,7 @@ import ImgSuccessRequest from '../images/ImgSuccessRequest';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/routes';
 import ImgRejectedRequest from '../images/ImgRejectedRequest';
+import s from './ModalWindow.module.scss';
 
 interface ModalWindowProps {
   onClose: () => void;
@@ -19,12 +20,12 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, isSuccess }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className={s.modal}>
+      <div className={s.content}>
         {isSuccess ? (
           <>
-            <div className="modal-content__title">Форма успешно отправлена</div>
-            <div className="modal-content__image">
+            <div className={s.title}>Форма успешно отправлена</div>
+            <div>
               <ImgSuccessRequest />
             </div>
             <Button type="button" handleClick={handleClickSuccess}>
@@ -33,8 +34,8 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, isSuccess }) => {
           </>
         ) : (
           <>
-            <div className="modal-content__title">Ошибка</div>
-            <div className="modal-content__image">
+            <div className={s.title}>Ошибка</div>
+            <div>
               <ImgRejectedRequest />
             </div>
             <Button type="button" handleClick={onClose}>

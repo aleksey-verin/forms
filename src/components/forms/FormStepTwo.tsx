@@ -1,16 +1,17 @@
 import { Formik, Field, Form, FieldArray, getIn } from 'formik';
 import { FC } from 'react';
-import Button from '../../components/common/buttons/Button';
+import Button from '../common/buttons/Button';
 import {
   selectorForm,
   setCurrentStep,
   setStepTwoData
 } from '../../store/reducers/formData/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
-import ImgPlus from '../../components/images/ImgPlus';
-import ImgBin from '../../components/images/ImgBin';
+import ImgPlus from '../images/ImgPlus';
+import ImgBin from '../images/ImgBin';
 import { useSelector } from 'react-redux';
 import { lengthOfFields, stepTwoSchema } from '../../utils/validation/validation';
+import s from './formsStyles.module.scss';
 
 const FormStepTwo: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,39 +36,40 @@ const FormStepTwo: FC = () => {
         console.log(values);
       }}>
       {({ values, errors, touched }) => (
-        <Form className="create-form">
+        <Form className={s.form}>
           <label>
             Advantage
             <FieldArray
               name="advantage"
               render={(arrayHelpers) => (
-                <div className="advantage">
-                  <div className="advantage-items">
+                <div className={s.advantage}>
+                  <div className={s.advantageItems}>
                     {values.advantage.map((_, index) => (
-                      <div className="advantage-items__field" key={index}>
+                      <div className={s.advantageField} key={index}>
                         <Field
                           className={
                             getIn(arrayHelpers.form.errors, `advantage.${index}`) &&
                             getIn(arrayHelpers.form.touched, `advantage.${index}`)
-                              ? 'error'
+                              ? s.error
                               : ''
                           }
                           name={`advantage.${index}`}
                           placeholder={'advantage'}
                         />
                         <button
-                          className="button-remove"
+                          className={s.buttonRemove}
                           onClick={() => arrayHelpers.remove(index)}>
                           <ImgBin />
                         </button>
                         {/* <ErrorMessage name={`advantage.${index}`} /> */}
                         {getIn(arrayHelpers.form.errors, `advantage.${index}`) &&
                         getIn(arrayHelpers.form.touched, `advantage.${index}`) ? (
-                          <div className="advantage-error">
+                          <div className={s.advantageError}>
                             {getIn(arrayHelpers.form.errors, `advantage.${index}`)}
                           </div>
                         ) : null}
-                        <div className="field-tip">{`Max - ${lengthOfFields.advantage} chars`}</div>
+                        <div
+                          className={s.fieldTip}>{`Max - ${lengthOfFields.advantage} chars`}</div>
                       </div>
                     ))}
                   </div>
@@ -83,7 +85,7 @@ const FormStepTwo: FC = () => {
               )}
             />
           </label>
-          <div className="checkbox" role="group" aria-labelledby="checkbox-group">
+          <div className={s.checkbox} role="group" aria-labelledby="checkbox-group">
             <div>Checkbox group</div>
             <label>
               <Field type="checkbox" name="checkbox" value="1" />
@@ -98,10 +100,10 @@ const FormStepTwo: FC = () => {
               Three
             </label>
             {errors.checkbox && touched.checkbox ? (
-              <div className="field-error">{errors.checkbox}</div>
+              <div className={s.fieldError}>{errors.checkbox}</div>
             ) : null}
           </div>
-          <div className="radio" role="group" aria-labelledby="checkbox-group">
+          <div className={s.radio} role="group" aria-labelledby="checkbox-group">
             <div>Ratio group</div>
             <label>
               <Field type="radio" name="radio" value="1" />
@@ -116,10 +118,10 @@ const FormStepTwo: FC = () => {
               Three
             </label>
             {errors.radio && touched.radio ? (
-              <div className="field-error">{errors.radio}</div>
+              <div className={s.fieldError}>{errors.radio}</div>
             ) : null}
           </div>
-          <div className="create-form__buttons">
+          <div className={s.buttons}>
             <Button
               handleClick={() => {
                 dispatch(setStepTwoData(values));

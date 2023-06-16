@@ -1,6 +1,6 @@
 import { Formik, Field, Form } from 'formik';
 import { FC } from 'react';
-import Button from '../../components/common/buttons/Button';
+import Button from '../common/buttons/Button';
 import { ROUTES } from '../../routes/routes';
 import {
   selectorForm,
@@ -11,6 +11,7 @@ import { stepOneSchema } from '../../utils/validation/validation';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import s from './formsStyles.module.scss';
 
 const FormStepOne: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,11 +39,11 @@ const FormStepOne: FC = () => {
         console.log(values);
       }}>
       {({ values, errors, touched, handleChange, handleBlur }) => (
-        <Form className="create-form">
+        <Form className={s.form}>
           <label>
             Nickname
             <Field
-              className={errors.nickname && touched.nickname ? 'error' : ''}
+              className={errors.nickname && touched.nickname ? s.error : ''}
               type={'text'}
               name={'nickname'}
               onChange={handleChange}
@@ -50,27 +51,27 @@ const FormStepOne: FC = () => {
               placeholder={'Nickname'}
             />
             {errors.nickname && touched.nickname ? (
-              <div className="field-error">{errors.nickname}</div>
+              <div className={s.fieldError}>{errors.nickname}</div>
             ) : null}
-            <div className="field-tip">Tip is here</div>
+            <div className={s.fieldTip}>Tip is here</div>
           </label>
           <label>
             Name
             <Field
-              className={errors.name && touched.name ? 'error' : ''}
+              className={errors.name && touched.name ? s.error : ''}
               type={'text'}
               name={'name'}
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder={'Name'}
             />
-            {errors.name && touched.name ? <div className="field-error">{errors.name}</div> : null}
-            <div className="field-tip">Tip is here</div>
+            {errors.name && touched.name ? <div className={s.fieldError}>{errors.name}</div> : null}
+            <div className={s.fieldTip}>Tip is here</div>
           </label>
           <label>
             Surname
             <Field
-              className={errors.surname && touched.surname ? 'error' : ''}
+              className={errors.surname && touched.surname ? s.error : ''}
               type={'text'}
               name={'surname'}
               onChange={handleChange}
@@ -78,16 +79,16 @@ const FormStepOne: FC = () => {
               placeholder={'Surname'}
             />
             {errors.surname && touched.surname ? (
-              <div className="field-error">{errors.surname}</div>
+              <div className={s.fieldError}>{errors.surname}</div>
             ) : null}
-            <div className="field-tip">Tip is here</div>
+            <div className={s.fieldTip}>Tip is here</div>
           </label>
           <label>
             Gender
             <Field
               as={'select'}
-              className={`${errors.gender && touched.gender ? 'error' : ''} ${
-                !values.gender.length ? 'empty' : ''
+              className={`${errors.gender && touched.gender ? s.error : ''} ${
+                !values.gender.length ? s.empty : ''
               }`}
               type={'text'}
               name={'gender'}
@@ -100,11 +101,11 @@ const FormStepOne: FC = () => {
               <option value={'female'}>Female</option>
             </Field>
             {errors.gender && touched.gender ? (
-              <div className="field-error">{errors.gender}</div>
+              <div className={s.fieldError}>{errors.gender}</div>
             ) : null}
-            <div className="field-tip">Tip is here</div>
+            <div className={s.fieldTip}>Tip is here</div>
           </label>
-          <div className="create-form__buttons">
+          <div className={s.buttons}>
             <Button
               handleClick={() => {
                 dispatch(setStepOneData(values));

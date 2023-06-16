@@ -1,5 +1,6 @@
 import { CSSProperties, FC } from 'react';
 import { FormStep } from '../../../store/reducers/formData/types';
+import s from './Stepper.module.scss';
 
 interface StepperProps {
   currentStep: FormStep;
@@ -10,8 +11,8 @@ const Stepper: FC<StepperProps> = ({ currentStep, stepperData }) => {
   const classForStep = (indexOfItem: number, currentStep: FormStep): string => {
     if (currentStep === 'initial') return '';
     if (typeof currentStep === 'number') {
-      if (currentStep === indexOfItem + 1) return 'active';
-      if (currentStep > indexOfItem + 1) return 'checked';
+      if (currentStep === indexOfItem + 1) return s.active;
+      if (currentStep > indexOfItem + 1) return s.checked;
     }
     return '';
   };
@@ -19,7 +20,7 @@ const Stepper: FC<StepperProps> = ({ currentStep, stepperData }) => {
   const classForTitle = (indexOfItem: number, currentStep: FormStep): string => {
     if (currentStep === 'initial') return '';
     if (typeof currentStep === 'number') {
-      if (currentStep === indexOfItem + 1 || currentStep > indexOfItem + 1) return 'active';
+      if (currentStep === indexOfItem + 1 || currentStep > indexOfItem + 1) return s.active;
     }
     return '';
   };
@@ -32,21 +33,21 @@ const Stepper: FC<StepperProps> = ({ currentStep, stepperData }) => {
     }
   };
   return (
-    <div className="stepper">
-      <div className="stepper-grey-line"></div>
-      <div className="stepper-items">
+    <div className={s.stepper}>
+      <div className={s.greyLine}></div>
+      <div className={s.items}>
         {stepperData.map((_, index) => (
-          <div key={index} className={`stepper-items-item ${classForStep(index, currentStep)}`}>
-            <div className="item-block"></div>
+          <div key={index} className={`${s.item} ${classForStep(index, currentStep)}`}>
+            <div className={s.itemBlock}></div>
           </div>
         ))}
       </div>
-      <div className="stepper-title">
+      <div className={s.title}>
         {stepperData.map((item, index, array) => (
           <div
             key={index}
             style={styleForEdgedText(index, array)}
-            className={`stepper-title__item ${classForTitle(index, currentStep)}`}>
+            className={`${s.itemText} ${classForTitle(index, currentStep)}`}>
             {item}
           </div>
         ))}

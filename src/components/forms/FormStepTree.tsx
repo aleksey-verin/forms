@@ -1,6 +1,6 @@
 import { Formik, Field, Form } from 'formik';
 import { FC, useState } from 'react';
-import Button from '../../components/common/buttons/Button';
+import Button from '../common/buttons/Button';
 import {
   selectorForm,
   setCurrentStep,
@@ -10,8 +10,10 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { countCharactersWithoutSpaces } from '../../utils/helpers';
 import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
-import ModalWindow from '../../components/modal-window/ModalWindow';
+import ModalWindow from '../modalWindow/ModalWindow';
 import { stepThreeSchema } from '../../utils/validation/validation';
+import s from './formsStyles.module.scss';
+import Loader from '../common/loader/Loader';
 
 const FormStepTree: FC = () => {
   const dispatch = useAppDispatch();
@@ -39,25 +41,28 @@ const FormStepTree: FC = () => {
         console.log(values);
       }}>
       {({ values, errors, touched }) => (
-        <Form className="create-form">
-          <label className="about-field">
+        <Form className={s.form}>
+          <label className={s.aboutField}>
             About
             <Field
               as={'textarea'}
-              className={errors.about && touched.about ? 'error' : ''}
+              className={errors.about && touched.about ? s.error : ''}
               type={'text'}
               name={'about'}
               placeholder={'about'}
             />
             {errors.about && touched.about ? (
-              <div className="field-error">{errors.about}</div>
+              <div className={s.fieldError}>{errors.about}</div>
             ) : null}
-            <div className="field-tip">{`Characters without spaces (max - 200): ${countCharactersWithoutSpaces(
+            <div
+              className={
+                s.fieldTip
+              }>{`Characters without spaces (max - 200): ${countCharactersWithoutSpaces(
               values.about
             )}`}</div>
           </label>
 
-          <div className="create-form__buttons">
+          <div className={s.buttons}>
             <Button
               handleClick={() => {
                 dispatch(setStepThreeData(values));
@@ -67,7 +72,10 @@ const FormStepTree: FC = () => {
               transparent={true}>
               Назад
             </Button>
-            <Button type="submit">Отправить</Button>
+            <Button type="submit">
+              Отправить
+              <Loader />
+            </Button>
           </div>
           <button style={{ backgroundColor: 'white' }} onClick={() => setShowModal(true)}>
             Show modal using a portal

@@ -1,0 +1,31 @@
+@import '/src/styles/variables.scss';
+
+.modal {
+  position: absolute;
+  background-color: #0000003a;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .content {
+    width: 460px;
+    min-height: 300px;
+    padding: 32px;
+    box-sizing: border-box;
+    background-color: $color-white;
+    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    .title {
+      font-size: 20px;
+    }
+  }
+}

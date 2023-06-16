@@ -1,0 +1,25 @@
+@import '/src/styles/variables.scss';
+
+.buttonMain {
+  font-size: 14px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 4px;
+  background-color: $color-blue;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 15px;
+  position: relative;
+  &.transparent {
+    background-color: inherit;
+    border: 1.5px solid $color-blue;
+    color: $color-blue;
+  }
+  & svg {
+    margin: 0 auto;
+    // position: absolute;
+  }
+}
