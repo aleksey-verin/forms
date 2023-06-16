@@ -24,7 +24,7 @@ interface StepThreeData {
   about: string;
 }
 
-type FormStep = 'initial' | 1 | 2 | 3;
+export type FormStep = 'initial' | 1 | 2 | 3;
 
 interface initialStateTypes {
   formData: {

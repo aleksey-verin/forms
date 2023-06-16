@@ -60,16 +60,7 @@ const FormStepOne: FC = () => {
         dispatch(setCurrentStep(2));
         console.log(values);
       }}>
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur
-        // isValid,
-        // dirty,
-        // handleSubmit
-      }) => (
+      {({ values, errors, touched, handleChange, handleBlur }) => (
         <Form className="create-form">
           <label>
             Nickname
@@ -79,7 +70,6 @@ const FormStepOne: FC = () => {
               name={'nickname'}
               onChange={handleChange}
               onBlur={handleBlur}
-              // value={values.nickname}
               placeholder={'Nickname'}
             />
             {errors.nickname && touched.nickname ? (
@@ -90,13 +80,11 @@ const FormStepOne: FC = () => {
           <label>
             Name
             <Field
-              // className={s.inputSteps}
               className={errors.name && touched.name ? 'error' : ''}
               type={'text'}
               name={'name'}
               onChange={handleChange}
               onBlur={handleBlur}
-              // value={values.name}
               placeholder={'Name'}
             />
             {errors.name && touched.name ? <div className="field-error">{errors.name}</div> : null}
@@ -110,7 +98,6 @@ const FormStepOne: FC = () => {
               name={'surname'}
               onChange={handleChange}
               onBlur={handleBlur}
-              // value={values.surname}
               placeholder={'Surname'}
             />
             {errors.surname && touched.surname ? (
@@ -122,7 +109,6 @@ const FormStepOne: FC = () => {
             Gender
             <Field
               as={'select'}
-              // className={s.selectInput}
               className={`${errors.gender && touched.gender ? 'error' : ''} ${
                 !values.gender.length ? 'empty' : ''
               }`}

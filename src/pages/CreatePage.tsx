@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes';
 import FormStepTwo from './formSteps/FormStepTwo';
 import FormStepTree from './formSteps/FormStepTree';
+import { stepperData } from '../utils/constants/constants';
+import Stepper from '../components/common/stepper/Stepper';
 
-interface CreatePageProps {}
-
-const CreatePage: FC<CreatePageProps> = () => {
+const CreatePage: FC = () => {
   const { formCurrentStep } = useSelector(selectorForm);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const CreatePage: FC<CreatePageProps> = () => {
 
   return (
     <main className="create">
-      <div>{`Current step: ${formCurrentStep}`}</div>
+      <Stepper stepperData={stepperData} currentStep={formCurrentStep} />
       {formCurrentStep === 1 && <FormStepOne />}
       {formCurrentStep === 2 && <FormStepTwo />}
       {formCurrentStep === 3 && <FormStepTree />}

@@ -1,5 +1,5 @@
 import { Formik, Field, Form } from 'formik';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import * as yup from 'yup';
 import Button from '../../components/common/buttons/Button';
 import { selectorForm, setCurrentStep, setStepThreeData } from '../../store/reducers/formSlice';
@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 // import { useNavigate } from 'react-router-dom';
 import { countCharactersWithoutSpaces } from '../../utils/helpers';
 import { useSelector } from 'react-redux';
+import { createPortal } from 'react-dom';
+import ModalWindow from '../../components/modal-window/ModalWindow';
 
 const stepOneSchema = yup.object().shape({
   about: yup
@@ -33,6 +35,8 @@ const FormStepTree: FC = () => {
     }
   } = useSelector(selectorForm);
 
+  const [showModal, setShowModal] = useState(false);
+
   // const navigate = useNavigate();
 
   return (
@@ -47,34 +51,15 @@ const FormStepTree: FC = () => {
         // dispatch(setCurrentStep(2));
         console.log(values);
       }}>
-      {({
-        values,
-        errors,
-        touched
-        // handleChange,
-        // handleBlur
-        // isValid,
-        // dirty,
-        // handleSubmit
-      }) => (
+      {({ values, errors, touched }) => (
         <Form className="create-form">
           <label className="about-field">
             About
-            {/* <Field name="about">
-              {({
-                field // { name, value, onChange, onBlur }
-              }: // form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-              // meta
-              FieldProps) => <textarea placeholder="about" {...field} />}
-            </Field> */}
             <Field
               as={'textarea'}
               className={errors.about && touched.about ? 'error' : ''}
               type={'text'}
               name={'about'}
-              // onChange={handleChange}
-              // onBlur={handleBlur}
-              // value={values.nickname}
               placeholder={'about'}
             />
             {errors.about && touched.about ? (
@@ -97,6 +82,11 @@ const FormStepTree: FC = () => {
             />
             <Button type="submit" text="Отправить" />
           </div>
+          <button style={{ backgroundColor: 'white' }} onClick={() => setShowModal(true)}>
+            Show modal using a portal
+          </button>
+          {showModal &&
+            createPortal(<ModalWindow onClose={() => setShowModal(false)} />, document.body)}
         </Form>
       )}
     </Formik>
