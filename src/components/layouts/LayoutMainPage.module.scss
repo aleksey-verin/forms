@@ -17,3 +17,9 @@
     background: #242424;
   }
 }
+
+@media (max-width: $w504) {
+  .mainPage {
+    margin-top: 5px;
+  }
+}

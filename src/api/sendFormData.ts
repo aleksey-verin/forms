@@ -16,9 +16,5 @@ export async function sendFormData(formData: MyFormData): Promise<Response> {
     headers: headersList
   });
 
-  // const data = await response.json();
-
-  // return data;
-
   return response;
 }

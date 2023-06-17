@@ -1,3 +1,5 @@
+@import '/src/styles/variables.scss';
+
 .container {
   width: 100%;
   display: flex;
@@ -47,5 +49,16 @@
       background: #42474d;
       color: #ffffff;
     }
+  }
+}
+@media (max-width: $w399) {
+  .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .info {
+    width: 100%;
+    align-items: center;
+    gap: 10px;
   }
 }

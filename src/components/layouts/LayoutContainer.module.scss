@@ -1,7 +1,15 @@
+@import '/src/styles/variables.scss';
+
 .container {
   width: 100%;
   max-width: 930px;
   box-sizing: border-box;
   padding: 0 15px;
   margin: 0 auto;
+}
+
+@media (max-width: $w504) {
+  .container {
+    padding: 0 5px;
+  }
 }
