@@ -17,9 +17,14 @@
     background-color: inherit;
     border: 1.5px solid $color-blue;
     color: $color-blue;
+    &:hover {
+      background-color: #5558fa25;
+    }
   }
   & svg {
     margin: 0 auto;
-    // position: absolute;
+  }
+  &:hover {
+    background-color: $color-blue-light;
   }
 }

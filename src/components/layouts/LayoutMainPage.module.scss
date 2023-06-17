@@ -1,3 +1,5 @@
+@import '/src/styles/variables.scss';
+
 .mainPage {
   height: 100%;
   padding: 24px;
@@ -8,4 +10,10 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mainPage {
+    background: #242424;
+  }
 }

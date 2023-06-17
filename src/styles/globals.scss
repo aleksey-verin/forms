@@ -1,3 +1,11 @@
+@font-face {
+  font-family: SB Sans Interface;
+  src: url('/fonts/SB Sans Interface.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 :root {
   font-family: SB Sans Interface, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -14,6 +22,11 @@
   -webkit-text-size-adjust: 100%;
 }
 
+#root {
+  margin: 0 auto;
+  width: 100%;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -26,8 +39,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
-  /* min-width: 320px; */
   min-height: 100vh;
 }
 
@@ -57,13 +68,22 @@ button:focus-visible {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #1a1a1a;
   }
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
+  button,
+  input,
+  select,
+  textarea {
+    background-color: #1a1a1a;
+  }
+  button:disabled,
+  input:disabled,
+  select:disabled {
+    cursor: inherit;
+    color: rgba(255, 255, 255, 0.3);
   }
 }
