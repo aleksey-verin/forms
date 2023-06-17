@@ -1,3 +1,5 @@
+@import '/src/styles/variables.scss';
+
 .stepper {
   width: 100%;
   display: flex;
@@ -11,7 +13,7 @@
     top: 4px;
     position: absolute;
     height: 8px;
-    background: #c9c9c9;
+    background: $color-gray;
     z-index: 1;
   }
   .items {
@@ -27,7 +29,7 @@
         width: auto;
       }
       & .itemBlock {
-        background: #999;
+        background: $color-gray-300;
         width: 16px;
         height: 16px;
         border-radius: 50%;
@@ -42,17 +44,17 @@
         right: 3px;
         top: 4px;
         height: 8px;
-        background: #5558fa;
+        background: $color-blue;
         z-index: -1;
       }
       &.active .itemBlock {
-        background-color: #5558fa;
+        background-color: $color-blue;
         &::before {
           content: '';
           width: 4px;
           height: 4px;
           border-radius: 2px;
-          background-color: #fff;
+          background-color: $color-white;
         }
       }
       &:not(:first-child):not(:last-child) {
@@ -67,7 +69,7 @@
       &.checked {
         z-index: 5;
         & .itemBlock {
-          background-color: #5558fa;
+          background-color: $color-blue;
           &::before {
             content: '';
             width: 100%;
@@ -86,7 +88,7 @@
         right: 3px;
         top: 4px;
         height: 8px;
-        background: #5558fa;
+        background: $color-blue;
         z-index: -1;
       }
     }
@@ -97,12 +99,12 @@
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: #999;
+    color: $color-gray-300;
     .itemText {
       flex: 1 1 auto;
       text-align: center;
       &.active {
-        color: #5558fa;
+        color: $color-blue;
       }
       &:first-child {
         text-align: start;
@@ -121,12 +123,17 @@
 @media (prefers-color-scheme: dark) {
   .stepper {
     .greyLine {
-      background: #454545;
+      background: $color-gray-400;
     }
     .items {
       .item {
         & .itemBlock {
-          background: #494949;
+          background: $color-gray-500;
+        }
+        &.active .itemBlock {
+          &::before {
+            background-color: $color-black-light;
+          }
         }
       }
     }

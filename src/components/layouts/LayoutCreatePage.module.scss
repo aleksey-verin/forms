@@ -3,7 +3,7 @@
 .createPage {
   height: 100%;
   padding: 24px;
-  background: #fff;
+  background: $color-white;
   border-radius: 12px;
   box-sizing: border-box;
   margin-top: 24px;
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   .createPage {
-    background: #242424;
+    background: $color-black-light;
   }
 }
 

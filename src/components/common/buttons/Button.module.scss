@@ -6,7 +6,7 @@
   min-width: 44px;
   border-radius: 4px;
   background-color: $color-blue;
-  color: #fff;
+  color: $color-white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,6 +25,6 @@
     margin: 0 auto;
   }
   &:hover {
-    background-color: $color-blue-light;
+    background-color: $color-blue-light-300;
   }
 }
