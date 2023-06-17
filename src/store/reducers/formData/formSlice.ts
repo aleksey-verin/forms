@@ -100,6 +100,9 @@ export const formSlice = createSlice({
     },
     setCurrentStep: (state, { payload }: PayloadAction<FormStep>) => {
       state.formCurrentStep = payload;
+    },
+    resetFormData: (state) => {
+      state.formData = initialState.formData;
     }
   },
   extraReducers: (builder) => {
@@ -121,6 +124,12 @@ export const formSlice = createSlice({
 });
 
 export const selectorForm = (state: IRootState) => state.formSlice;
-export const { setStepOneData, setStepZeroData, setStepTwoData, setStepThreeData, setCurrentStep } =
-  formSlice.actions;
+export const {
+  setStepOneData,
+  setStepZeroData,
+  setStepTwoData,
+  setStepThreeData,
+  setCurrentStep,
+  resetFormData
+} = formSlice.actions;
 export default formSlice.reducer;

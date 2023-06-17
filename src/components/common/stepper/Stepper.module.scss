@@ -117,3 +117,18 @@
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .stepper {
+    .greyLine {
+      background: #454545;
+    }
+    .items {
+      .item {
+        & .itemBlock {
+          background: #494949;
+        }
+      }
+    }
+  }
+}

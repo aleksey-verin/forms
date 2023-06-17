@@ -50,6 +50,15 @@
       color: #ffffff;
     }
   }
+  .info {
+    .links {
+      & a {
+        svg path {
+          fill: rgb(76, 76, 76);
+        }
+      }
+    }
+  }
 }
 @media (max-width: $w399) {
   .container {

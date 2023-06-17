@@ -57,11 +57,11 @@ const FormStepTwo: FC = () => {
                           placeholder={'advantage'}
                         />
                         <button
+                          type="button"
                           className={s.buttonRemove}
                           onClick={() => arrayHelpers.remove(index)}>
                           <ImgBin />
                         </button>
-                        {/* <ErrorMessage name={`advantage.${index}`} /> */}
                         {getIn(arrayHelpers.form.errors, `advantage.${index}`) &&
                         getIn(arrayHelpers.form.touched, `advantage.${index}`) ? (
                           <div className={s.advantageError}>

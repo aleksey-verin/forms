@@ -11,7 +11,7 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { countCharactersWithoutSpaces } from '../../utils/helpers';
 import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
-import ModalWindow from '../modalWindow/ModalWindow';
+import ModalWindow from '../common/modalWindow/ModalWindow';
 import { stepThreeSchema } from '../../utils/validation/validation';
 import s from './formsStyles.module.scss';
 import Loader from '../common/loader/Loader';

@@ -42,7 +42,7 @@ const FormStepInitial: FC = () => {
               type={'text'}
               mask="+7 (999) 999-99-99"
               name={'phone'}
-              placeholder={'+7 (999) 999-99-99'}
+              placeholder={'+7 (911) 991-71-17'}
               onBlur={handleBlur}
               onChange={handleChange}
               defaultValue={phone ?? ''}
