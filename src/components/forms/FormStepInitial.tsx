@@ -48,7 +48,7 @@ const FormStepInitial: FC = () => {
               defaultValue={phone ?? ''}
             />
             {errors.phone && touched.phone ? (
-              <div className="field-error">{errors.phone}</div>
+              <div className={s.fieldError}>{errors.phone}</div>
             ) : null}
           </label>
           <label>

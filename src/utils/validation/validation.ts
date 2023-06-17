@@ -1,9 +1,9 @@
 import * as yup from 'yup';
 
-const emailRegExp = /.+@.+\..+/i;
-const phoneRegex = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
-const onlyLettersAndDigitsRegExp = /^[а-яА-ЯёЁa-zA-Z0-9]+$/;
-const onlyLettersRegExp = /^[а-яА-ЯёЁa-zA-Z]+$/;
+const emailRegEx = /.+@.+\..+/i;
+const phoneRegEx = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
+const onlyLettersAndDigitsRegEx = /^[а-яА-ЯёЁa-zA-Z0-9]+$/;
+const onlyLettersRegEx = /^[а-яА-ЯёЁa-zA-Z]+$/;
 
 export const lengthOfFields = {
   nickname: 30,
@@ -16,12 +16,12 @@ export const lengthOfFields = {
 export const stepZeroSchema = yup.object().shape({
   phone: yup
     .string()
-    .matches(phoneRegex, 'Enter the phone in the format "+7 (XXX) XXX-XX-XX"')
+    .matches(phoneRegEx, 'Enter the phone in the format "+7 (XXX) XXX-XX-XX"')
     .required('Enter the phone in the format "+7 (XXX) XXX-XX-XX"'),
   email: yup
     .string()
     .trim('')
-    .matches(emailRegExp, 'Enter the email in the format "example@domain.com"')
+    .matches(emailRegEx, 'Enter the email in the format "example@domain.com"')
     .required('Enter the email in the format "example@domain.com"')
 });
 
@@ -30,21 +30,21 @@ export const stepOneSchema = yup.object().shape({
     .string()
     .trim('')
     .max(lengthOfFields.nickname, 'Too Long!')
-    .matches(onlyLettersAndDigitsRegExp)
+    .matches(onlyLettersAndDigitsRegEx)
     .required('Required'),
   name: yup
     .string()
     .trim('')
     .max(lengthOfFields.name, 'Too Long!')
-    .matches(onlyLettersRegExp)
+    .matches(onlyLettersRegEx)
     .required('Required'),
   surname: yup
     .string()
     .trim('')
     .max(lengthOfFields.surname, 'Too Long!')
-    .matches(onlyLettersRegExp)
+    .matches(onlyLettersRegEx)
     .required('Required'),
-  gender: yup.string().required('Required!')
+  sex: yup.string().required('Required!')
 });
 
 export const stepTwoSchema = yup.object().shape({

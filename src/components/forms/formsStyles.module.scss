@@ -4,8 +4,8 @@
   gap: 48px;
   // margin-top: 24px;
   & label {
-    // width: fit-content;
-    width: 100%;
+    width: fit-content;
+    // width: 100%;
     font-size: 14px;
     display: flex;
     flex-direction: column;
@@ -125,9 +125,11 @@
 }
 
 .aboutField {
+  width: 100% !important;
   & textarea {
     box-sizing: border-box;
     max-width: 100%;
+    // width: 100% !important;
   }
 }
 

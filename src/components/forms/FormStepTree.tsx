@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import Button from '../common/buttons/Button';
 import {
   selectorForm,
+  sendData,
   setCurrentStep,
   setStepThreeData
 } from '../../store/reducers/formData/formSlice';
@@ -18,27 +19,26 @@ import Loader from '../common/loader/Loader';
 const FormStepTree: FC = () => {
   const dispatch = useAppDispatch();
   const {
-    formData: {
-      stepThree: { about }
-    }
+    formData: { stepZero, stepOne, stepTwo, stepThree },
+    sendData: { isLoading, isSuccess }
   } = useSelector(selectorForm);
 
   const [showModal, setShowModal] = useState(false);
 
   // const navigate = useNavigate();
-  const isSuccess = true;
+  // const isSuccess = true;
 
   return (
     <Formik
       initialValues={{
-        about: about
+        about: stepThree.about
       }}
       validationSchema={stepThreeSchema}
       validateOnBlur
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         dispatch(setStepThreeData(values));
-        // dispatch(setCurrentStep(2));
-        console.log(values);
+        await dispatch(sendData({ ...stepZero, ...stepOne, ...stepTwo, ...values }));
+        setShowModal(true);
       }}>
       {({ values, errors, touched }) => (
         <Form className={s.form}>
@@ -64,6 +64,7 @@ const FormStepTree: FC = () => {
 
           <div className={s.buttons}>
             <Button
+              disabled={isLoading}
               handleClick={() => {
                 dispatch(setStepThreeData(values));
                 dispatch(setCurrentStep(2));
@@ -72,14 +73,11 @@ const FormStepTree: FC = () => {
               transparent={true}>
               Назад
             </Button>
-            <Button type="submit">
+            <Button type="submit" disabled={isLoading}>
               Отправить
-              <Loader />
+              {isLoading && <Loader />}
             </Button>
           </div>
-          <button style={{ backgroundColor: 'white' }} onClick={() => setShowModal(true)}>
-            Show modal using a portal
-          </button>
           {showModal &&
             createPortal(
               <ModalWindow onClose={() => setShowModal(false)} isSuccess={isSuccess} />,

@@ -3,18 +3,23 @@ import s from './Button.module.scss';
 
 interface ButtonProps {
   type: 'submit' | 'button';
-  // text?: string;
+  disabled?: boolean;
   transparent?: boolean;
-  // image?: ReactNode;
   handleClick?: () => void;
   children: ReactNode;
 }
 
-const Button: FC<ButtonProps> = ({ type, transparent = false, handleClick, children }) => {
+const Button: FC<ButtonProps> = ({
+  type,
+  transparent = false,
+  handleClick,
+  disabled = false,
+  children
+}) => {
   return (
     <button
+      disabled={disabled}
       onClick={handleClick}
-      // className={`buttonMain ${transparent ? 'transparent' : ''}`}
       className={`${s.buttonMain} ${transparent ? s.transparent : ''}`}
       type={type}>
       {children}

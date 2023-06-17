@@ -1,6 +1,17 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IRootState } from '../../store';
-import { FormStep, StepOneData, StepThreeData, StepTwoData, StepZeroData } from './types';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { AppDispatch, IRootState } from '../../store';
+import {
+  FormStep,
+  MyFormData,
+  ResponseFormData,
+  SexType,
+  StepOneData,
+  StepThreeData,
+  StepTwoData,
+  StepZeroData
+} from './types';
+import { sendFormData } from '@/api/sendFormData';
+import { stepNames } from '@/utils/constants/constants';
 
 interface initialStateTypes {
   formData: {
@@ -10,6 +21,12 @@ interface initialStateTypes {
     stepThree: StepThreeData;
   };
   formCurrentStep: FormStep;
+  sendData: {
+    message: ResponseFormData | null;
+    isLoading: boolean;
+    isSuccess: boolean;
+    isError: boolean;
+  };
 }
 
 const initialState = {
@@ -22,7 +39,7 @@ const initialState = {
       nickname: '',
       name: '',
       surname: '',
-      gender: ''
+      sex: SexType.none
     },
     stepTwo: {
       advantage: [''],
@@ -33,8 +50,31 @@ const initialState = {
       about: ''
     }
   },
-  formCurrentStep: 3
+  formCurrentStep: stepNames.initial,
+  sendData: {
+    message: null,
+    isLoading: false,
+    isSuccess: false,
+    isError: false
+  }
 };
+
+export const sendData = createAsyncThunk<
+  ResponseFormData,
+  MyFormData,
+  {
+    dispatch: AppDispatch;
+    state: IRootState;
+  }
+>('sendData', async (formData, thunkAPI) => {
+  try {
+    const response = await sendFormData(formData);
+    const data = (await response.json()) as ResponseFormData;
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
 
 export const formSlice = createSlice({
   name: 'formSlice',
@@ -48,7 +88,7 @@ export const formSlice = createSlice({
       state.formData.stepOne.nickname = payload.nickname;
       state.formData.stepOne.name = payload.name;
       state.formData.stepOne.surname = payload.surname;
-      state.formData.stepOne.gender = payload.gender;
+      state.formData.stepOne.sex = payload.sex;
     },
     setStepTwoData: (state, { payload }: PayloadAction<StepTwoData>) => {
       state.formData.stepTwo.advantage = payload.advantage;
@@ -61,10 +101,22 @@ export const formSlice = createSlice({
     setCurrentStep: (state, { payload }: PayloadAction<FormStep>) => {
       state.formCurrentStep = payload;
     }
-
-    // resetFormData: (state) => {
-    //   state.formData.stepOne.gender = initialState.formData.stepOne.gender as Gender;
-    // }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(sendData.pending, (state) => {
+      state.sendData.isLoading = true;
+      state.sendData.isSuccess = false;
+      state.sendData.isError = false;
+    });
+    builder.addCase(sendData.fulfilled, (state, { payload }: PayloadAction<ResponseFormData>) => {
+      state.sendData.message = payload;
+      state.sendData.isLoading = false;
+      state.sendData.isSuccess = true;
+    });
+    builder.addCase(sendData.rejected, (state) => {
+      state.sendData.isLoading = false;
+      state.sendData.isError = true;
+    });
   }
 });
 

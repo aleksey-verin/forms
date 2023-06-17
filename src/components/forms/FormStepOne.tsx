@@ -12,12 +12,13 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import s from './formsStyles.module.scss';
+import { SexType } from '@/store/reducers/formData/types';
 
 const FormStepOne: FC = () => {
   const dispatch = useAppDispatch();
   const {
     formData: {
-      stepOne: { nickname, name, surname, gender }
+      stepOne: { nickname, name, surname, sex }
     }
   } = useSelector(selectorForm);
 
@@ -29,7 +30,7 @@ const FormStepOne: FC = () => {
         nickname: nickname,
         name: name,
         surname: surname,
-        gender: gender
+        sex: sex
       }}
       validationSchema={stepOneSchema}
       validateOnBlur
@@ -84,25 +85,23 @@ const FormStepOne: FC = () => {
             <div className={s.fieldTip}>Tip is here</div>
           </label>
           <label>
-            Gender
+            Sex
             <Field
               as={'select'}
-              className={`${errors.gender && touched.gender ? s.error : ''} ${
-                !values.gender.length ? s.empty : ''
+              className={`${errors.sex && touched.sex ? s.error : ''} ${
+                !values.sex.length ? s.empty : ''
               }`}
               type={'text'}
-              name={'gender'}
+              name={'sex'}
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.gender}
-              placeholder={'Gender'}>
-              <option value="">Не выбрано</option>
-              <option value={'male'}>Male</option>
-              <option value={'female'}>Female</option>
+              value={values.sex}
+              placeholder={'Sex'}>
+              <option value={SexType.none}>Choose a gender</option>
+              <option value={SexType.man}>Man</option>
+              <option value={SexType.woman}>Woman</option>
             </Field>
-            {errors.gender && touched.gender ? (
-              <div className={s.fieldError}>{errors.gender}</div>
-            ) : null}
+            {errors.sex && touched.sex ? <div className={s.fieldError}>{errors.sex}</div> : null}
             <div className={s.fieldTip}>Tip is here</div>
           </label>
           <div className={s.buttons}>
