@@ -1,12 +1,11 @@
 import { FC } from 'react';
 import Button from '../buttons/Button';
 import ImgSuccessRequest from '../../images/ImgSuccessRequest';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../routes/routes';
 import ImgRejectedRequest from '../../images/ImgRejectedRequest';
 import s from './ModalWindow.module.scss';
 import { useAppDispatch } from '@/utils/hooks/useAppDispatch';
 import { resetFormData } from '@/store/reducers/formData/formSlice';
+import { clearLocalStorageData, storage } from '@/utils/storage/storage';
 
 interface ModalWindowProps {
   onClose: () => void;
@@ -15,12 +14,11 @@ interface ModalWindowProps {
 
 const ModalWindow: FC<ModalWindowProps> = ({ onClose, isSuccess }) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  const handleClickSuccess = () => {
+  const handleClickSuccess = async () => {
     dispatch(resetFormData());
+    await clearLocalStorageData(storage);
     onClose();
-    navigate(ROUTES.mainPage);
   };
 
   return (

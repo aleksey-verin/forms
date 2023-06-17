@@ -12,6 +12,7 @@ import {
 } from './types';
 import { sendFormData } from '@/api/sendFormData';
 import { stepNames } from '@/utils/constants/constants';
+import { storage, storageGetItem } from '@/utils/storage/storage';
 
 interface initialStateTypes {
   formData: {
@@ -30,7 +31,7 @@ interface initialStateTypes {
 }
 
 const initialState = {
-  formData: {
+  formData: storageGetItem(storage.formData) ?? {
     stepZero: {
       phone: null,
       email: null
@@ -50,7 +51,7 @@ const initialState = {
       about: ''
     }
   },
-  formCurrentStep: stepNames.initial,
+  formCurrentStep: storageGetItem(storage.formCurrentStep) ?? stepNames.initial,
   sendData: {
     message: null,
     isLoading: false,
@@ -103,6 +104,8 @@ export const formSlice = createSlice({
     },
     resetFormData: (state) => {
       state.formData = initialState.formData;
+      state.formCurrentStep = initialState.formCurrentStep;
+      state.sendData = initialState.sendData;
     }
   },
   extraReducers: (builder) => {

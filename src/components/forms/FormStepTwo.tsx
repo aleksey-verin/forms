@@ -33,7 +33,6 @@ const FormStepTwo: FC = () => {
       onSubmit={(values) => {
         dispatch(setStepTwoData(values));
         dispatch(setCurrentStep(3));
-        console.log(values);
       }}>
       {({ values, errors, touched }) => (
         <Form className={s.form}>

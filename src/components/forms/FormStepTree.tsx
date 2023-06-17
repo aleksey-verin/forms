@@ -8,7 +8,7 @@ import {
   setStepThreeData
 } from '../../store/reducers/formData/formSlice';
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch';
-import { countCharactersWithoutSpaces } from '../../utils/helpers';
+import { countCharactersWithoutSpaces } from '../../utils/helpers/helpers';
 import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
 import ModalWindow from '../common/modalWindow/ModalWindow';
@@ -24,9 +24,6 @@ const FormStepTree: FC = () => {
   } = useSelector(selectorForm);
 
   const [showModal, setShowModal] = useState(false);
-
-  // const navigate = useNavigate();
-  // const isSuccess = true;
 
   return (
     <Formik

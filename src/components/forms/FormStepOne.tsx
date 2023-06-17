@@ -37,7 +37,6 @@ const FormStepOne: FC = () => {
       onSubmit={(values) => {
         dispatch(setStepOneData(values));
         dispatch(setCurrentStep(2));
-        console.log(values);
       }}>
       {({ values, errors, touched, handleChange, handleBlur }) => (
         <Form className={s.form}>

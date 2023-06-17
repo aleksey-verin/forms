@@ -10,7 +10,6 @@ export interface StepOneData {
   sex: SexType;
 }
 
-// export type Gender = 'male' | 'female' | '';
 export enum SexType {
   man = 'man',
   woman = 'woman',
