@@ -6,6 +6,7 @@ import s from './ModalWindow.module.scss';
 import { useAppDispatch } from '@/utils/hooks/useAppDispatch';
 import { resetFormData } from '@/store/reducers/formData/formSlice';
 import { clearLocalStorageData, storage } from '@/utils/storage/storage';
+import ImgClose from '@/components/images/ImgClose';
 
 interface ModalWindowProps {
   onClose: () => void;
@@ -26,7 +27,7 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, isSuccess }) => {
       <div className={s.content}>
         {isSuccess ? (
           <>
-            <div className={s.title}>Форма успешно отправлена</div>
+            <div className={s.titleSuccess}>Форма успешно отправлена</div>
             <div>
               <ImgSuccessRequest />
             </div>
@@ -36,13 +37,20 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, isSuccess }) => {
           </>
         ) : (
           <>
-            <div className={s.title}>Ошибка</div>
+            <div className={s.titleError}>
+              <div>Ошибка</div>
+              <div onClick={onClose} className={s.close}>
+                <ImgClose />
+              </div>
+            </div>
             <div>
               <ImgRejectedRequest />
             </div>
-            <Button type="button" handleClick={onClose}>
-              Закрыть
-            </Button>
+            <div className={s.button}>
+              <Button type="button" handleClick={onClose}>
+                Закрыть
+              </Button>
+            </div>
           </>
         )}
       </div>
